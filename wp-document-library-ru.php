@@ -1,12 +1,11 @@
 <?php
 /**
- * Plugin Name:       Библиотека документов
- * Plugin URI:
- * Description:       Плагин для управления и вывода библиотеки документов на сайте.
- * Version:           1.0.0
- * Author:            WDL Team
- * Text Domain:       wp-document-library-ru
- * Domain Path:       /languages
+ * Plugin Name: WP Document Library RU
+ * Description: Библиотека документов для WordPress.
+ * Version: 1.0.0
+ * Author: Tarlykov
+ * Text Domain: wp-document-library-ru
+ * Domain Path: /languages
  */
 
 if (! defined('ABSPATH')) {

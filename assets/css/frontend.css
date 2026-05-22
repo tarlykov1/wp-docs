@@ -16,11 +16,36 @@
 .wdl-document-card{border:1px solid #eaecf0;border-radius:12px;padding:12px;background:#fff}
 .wdl-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
 .wdl-no-results{padding:10px;border:1px solid #eaecf0;background:#f8fafc;margin-top:10px;border-radius:10px}
-.wdl-single{max-width:980px;margin:1rem auto;padding:1rem;border:1px solid #eaecf0;border-radius:16px;background:#fff}
-.wdl-breadcrumbs{margin-bottom:10px;color:#667085;font-size:14px}.wdl-breadcrumbs a{text-decoration:none;color:#2c5aa0}
-.wdl-single-cover{float:left;margin:0 16px 10px 0}
-.wdl-single-cover img{width:100%!important;height:auto;border-radius:10px;border:1px solid #eaecf0;display:block}
-.wdl-single-content h1{margin-top:0}.wdl-single-description{font-size:1.05rem;color:#475467;margin-bottom:12px}.wdl-single-body:after,.wdl-single-content:after{content:"";display:block;clear:both}
-@media (max-width:720px){.wdl-doc-row{flex-wrap:wrap}.wdl-doc-actions{margin-left:0}.wdl-single-cover{float:none;margin:0 0 12px 0;max-width:180px;width:100%!important}}
+.wdl-single{max-width:980px;margin:1rem auto;padding:1.25rem;border:1px solid #eaecf0;border-radius:16px;background:#fff}
+.wdl-breadcrumbs{margin-bottom:12px;color:#667085;font-size:14px}.wdl-breadcrumbs a{text-decoration:none;color:#2c5aa0}
+.wdl-single-header{display:grid;grid-template-columns:minmax(160px,240px) 1fr;gap:18px;align-items:start}
+.wdl-single-cover{margin:0}
+.wdl-single-cover img{width:100%;max-width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid #eaecf0;display:block}
+.wdl-single-headline h1{margin-top:0;margin-bottom:10px}
+.wdl-single-description{font-size:1.03rem;line-height:1.55;color:#475467;margin:0 0 14px}
+.wdl-single-meta{margin:0 0 14px;padding:0;display:grid;gap:8px}
+.wdl-single-meta-row{display:grid;grid-template-columns:minmax(130px,190px) 1fr;gap:10px;padding:8px 10px;background:#f8fafc;border:1px solid #eef2f7;border-radius:10px}
+.wdl-single-meta dt{margin:0;color:#344054;font-weight:600}.wdl-single-meta dd{margin:0;color:#475467}
+.wdl-single-actions{margin:0 0 8px}
+.wdl-single-body{margin-top:14px;padding-top:14px;border-top:1px solid #eaecf0}
+@media (max-width:720px){.wdl-doc-row{flex-wrap:wrap}.wdl-doc-actions{margin-left:0}.wdl-single-header{grid-template-columns:1fr}.wdl-single-cover{max-width:180px}.wdl-single-meta-row{grid-template-columns:1fr}}
 
 .wdl-doc-title a{color:inherit;text-decoration:none}.wdl-doc-title a:hover{text-decoration:underline}
+
+.wpdl-document-page{max-width:980px;margin:1rem auto;padding:1.25rem;border:1px solid #eaecf0;border-radius:16px;background:#fff}
+.wpdl-document-layout{display:grid;grid-template-columns:minmax(120px,220px) 1fr;gap:18px;align-items:start}
+.wpdl-document-thumbnail img{width:100%;max-width:100%;height:auto;object-fit:cover;border:1px solid #eaecf0;border-radius:12px;display:block}
+.wpdl-document-thumbnail{overflow:hidden}
+.wpdl-document-content{min-width:0}
+.wpdl-document-title{margin:0 0 12px}
+.wpdl-document-description h2,.wpdl-document-file-info h2{font-size:1rem;margin:0 0 8px;color:#344054}
+.wpdl-document-description{margin-bottom:14px;color:#475467}
+.wpdl-document-meta,.wpdl-document-file-info dl{margin:0 0 14px;padding:0;display:grid;gap:8px}
+.wpdl-document-meta-row{display:grid;grid-template-columns:minmax(140px,220px) 1fr;gap:10px;padding:8px 10px;background:#f8fafc;border:1px solid #eef2f7;border-radius:10px}
+.wpdl-document-meta-row dt{margin:0;font-weight:600;color:#344054}
+.wpdl-document-meta-row dd{margin:0;color:#475467}
+.wpdl-document-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.wpdl-button{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+.wpdl-button-download{background:#2c5aa0;color:#fff}
+.wpdl-button-open{background:#fff;color:#2c5aa0;border:1px solid #2c5aa0}
+@media (max-width:720px){.wpdl-document-layout{grid-template-columns:1fr}.wpdl-document-thumbnail{max-width:180px}.wpdl-document-meta-row{grid-template-columns:1fr}.wpdl-document-actions .wpdl-button{width:100%;text-align:center}}
