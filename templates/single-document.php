@@ -1,3 +1,4 @@
+<!-- FONDPP SINGLE DOCUMENT TEMPLATE FILE LOADED 1.0.8 -->
 <?php
 get_header();
 ?>

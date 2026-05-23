@@ -4,6 +4,7 @@ if (! defined('ABSPATH')) {
 }
 ?>
 <!-- FONDPP DOCUMENT LIBRARY SINGLE CONTENT LOADED -->
+<!-- FONDPP SINGLE DOCUMENT CONTENT PART LOADED 1.0.8 -->
 <?php
 $post_id = get_the_ID();
 if (! $post_id) {
@@ -27,6 +28,32 @@ $subtitle = (string) get_post_meta($post_id, '_wdl_subtitle', true);
 $summary = $subtitle !== '' ? $subtitle : $description;
 if ($summary === '' && has_excerpt($post_id)) {
     $summary = (string) get_the_excerpt($post_id);
+}
+
+$post_content = (string) get_the_content();
+
+$normalize_text = static function ($value) {
+    $text = html_entity_decode(wp_strip_all_tags((string) $value), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $text = preg_replace('/\s+/u', ' ', $text);
+    $text = trim((string) $text);
+
+    if ($text === '') {
+        return '';
+    }
+
+    return function_exists('mb_strtolower') ? mb_strtolower($text, 'UTF-8') : strtolower($text);
+};
+
+$normalized_summary = $normalize_text($summary);
+$normalized_description = $normalize_text($description);
+$normalized_excerpt = $normalize_text((string) get_the_excerpt($post_id));
+$normalized_content = $normalize_text($post_content);
+
+$description_to_render = '';
+if ($normalized_description !== '' && $normalized_description !== $normalized_summary && $normalized_description !== $normalized_excerpt) {
+    $description_to_render = $description;
+} elseif ($normalized_description === '' && $normalized_content !== '' && $normalized_content !== $normalized_summary && $normalized_content !== $normalized_excerpt) {
+    $description_to_render = $post_content;
 }
 
 $file_name = '';
@@ -122,10 +149,10 @@ foreach (get_post_meta($post_id) as $meta_key => $values) {
                 <p class="wpdl-single-document-summary"><?php echo esc_html($summary); ?></p>
             <?php endif; ?>
 
-            <?php if ($description !== '' || get_the_content() !== '') : ?>
+            <?php if ($description_to_render !== '') : ?>
                 <section class="wpdl-document-description wpdl-single-document-description">
                     <h2>Описание</h2>
-                    <div><?php echo wp_kses_post(wpautop($description !== '' ? $description : get_the_content())); ?></div>
+                    <div><?php echo wp_kses_post(wpautop($description_to_render)); ?></div>
                 </section>
             <?php endif; ?>
 
