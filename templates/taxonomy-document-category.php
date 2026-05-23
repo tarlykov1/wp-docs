@@ -50,7 +50,7 @@ $data = array(
         </header>
 
         <?php if ($q->have_posts()) : ?>
-            <?php include WDL_PLUGIN_DIR . 'templates/document-library.php'; ?>
+            <?php include WDL_PLUGIN_DIR . 'templates/parts/document-library-list.php'; ?>
         <?php else : ?>
             <div class="wdl-empty-category">В этой категории пока нет документов.</div>
         <?php endif; ?>
