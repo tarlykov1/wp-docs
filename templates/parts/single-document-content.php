@@ -4,9 +4,19 @@ if (! defined('ABSPATH')) {
 }
 ?>
 <!-- FONDPP DOCUMENT LIBRARY SINGLE CONTENT LOADED -->
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 <?php
 $post_id = get_the_ID();
+if (! $post_id) {
+    $post_id = get_queried_object_id();
+}
+if (! $post_id) {
+    return;
+}
+$post = get_post($post_id);
+if ($post instanceof WP_Post) {
+    setup_postdata($post);
+}
+
 $file_id = absint(get_post_meta($post_id, '_wdl_file_id', true));
 $file_url_meta = (string) get_post_meta($post_id, '_wdl_file_url', true);
 $file_url_from_attachment = $file_id ? (string) wp_get_attachment_url($file_id) : '';
@@ -153,4 +163,8 @@ foreach (get_post_meta($post_id) as $meta_key => $values) {
         </div>
     </div>
 </article>
-<?php endwhile; endif; ?>
+<?php
+if (isset($post) && $post instanceof WP_Post) {
+    wp_reset_postdata();
+}
+?>

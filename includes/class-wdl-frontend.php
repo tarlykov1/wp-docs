@@ -12,7 +12,7 @@ class WDL_Frontend {
         $post_type = get_post_type();
         if (defined('WP_DEBUG') && WP_DEBUG) { error_log('FONDPP template_include post_type: ' . (string) $post_type); }
 
-        if (! $this->is_document_post_type($post_type)) {
+        if (! $this->is_document_single_context()) {
             return $template;
         }
 
@@ -34,7 +34,7 @@ class WDL_Frontend {
         }
 
         $post_type = get_post_type();
-        if (! $this->is_document_post_type($post_type)) {
+        if (! $this->is_document_single_context()) {
             return $content;
         }
 
@@ -73,11 +73,30 @@ class WDL_Frontend {
     }
 
     private function is_document_single(){
-        return is_singular() && $this->is_document_post_type(get_post_type());
+        return is_singular() && $this->is_document_single_context();
     }
 
     private function is_document_post_type($post_type){
         return in_array((string) $post_type, array('wdl_document'), true);
+    }
+
+    private function is_document_single_context(){
+        if (! is_singular()) {
+            return false;
+        }
+
+        $post_id = get_queried_object_id();
+        if (! $post_id) {
+            return false;
+        }
+
+        if ($this->is_document_post_type(get_post_type($post_id))) {
+            return true;
+        }
+
+        $file_id = (string) get_post_meta($post_id, '_wdl_file_id', true);
+        $file_url = (string) get_post_meta($post_id, '_wdl_file_url', true);
+        return $file_id !== '' || $file_url !== '';
     }
 
     public function debug_post_type_comment(){
