@@ -4,6 +4,7 @@ if (! defined('ABSPATH')) {
 }
 ?>
 <!-- FONDPP DOCUMENT LIBRARY SINGLE CONTENT LOADED -->
+<!-- FONDPP SINGLE DOCUMENT CONTENT PART LOADED 1.0.8 -->
 <?php
 $post_id = get_the_ID();
 if (! $post_id) {
