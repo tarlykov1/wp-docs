@@ -54,4 +54,20 @@ jQuery(function($){
             $wrap.prop('hidden', !nextOpen);
         });
     });
+
+    $('.wdl-document-viewer-section').each(function(){
+        var $section = $(this);
+        var $toggle = $section.find('.wdl-viewer-toggle').first();
+        var $wrap = $section.find('.wdl-document-viewer-wrap').first();
+        if(!$toggle.length || !$wrap.length){ return; }
+
+        $toggle.on('click', function(){
+            var isOpen = $toggle.attr('aria-expanded') === 'true';
+            var nextOpen = !isOpen;
+            $toggle.attr('aria-expanded', nextOpen ? 'true' : 'false');
+            $toggle.text(nextOpen ? ($toggle.data('text-close') || 'Скрыть документ') : ($toggle.data('text-open') || 'Посмотреть документ'));
+            $wrap.prop('hidden', !nextOpen);
+        });
+    });
+
 });
