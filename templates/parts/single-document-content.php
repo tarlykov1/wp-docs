@@ -15,6 +15,9 @@ $file_info_rows = array_filter(array('Тип файла' => $file_type, 'Раз�
 $important = $helpers->is_truthy(get_post_meta($post_id, '_wdl_important', true));
 $is_new = $helpers->is_truthy(get_post_meta($post_id, '_wdl_new', true));
 $show_pdf = $helpers->is_truthy(get_post_meta($post_id, '_wdl_pdf_viewer', true));
+$content_raw = (string) get_post_field('post_content', $post_id);
+$document_content = apply_filters('the_content', $content_raw);
+$has_document_content = ! empty(trim(wp_strip_all_tags($document_content)));
 
 $library_page_id = absint(WDL_Settings::get_option('wdl_library_page_id', 0));
 $library_url = $library_page_id ? get_permalink($library_page_id) : '';
@@ -43,6 +46,11 @@ $crumbs[] = esc_html(get_the_title($post_id));
         <div class="wpdl-document-thumbnail wpdl-single-document-thumbnail"><?php echo wp_kses_post($helpers->get_thumb_or_icon($post_id, $file_url, 'medium')); ?></div>
         <div class="wpdl-document-content wpdl-single-document-content">
             <h1 class="wpdl-document-title wpdl-single-document-title"><?php the_title(); ?></h1>
+            <?php if ($has_document_content) : ?>
+                <div class="wdl-document-content">
+                    <?php echo wp_kses_post($document_content); ?>
+                </div>
+            <?php endif; ?>
             <?php if ($important || $is_new) : ?><div class="wdl-badges"><?php if ($important) : ?><span class="wdl-badge wdl-badge-important">Важный</span><?php endif; ?><?php if ($is_new) : ?><span class="wdl-badge wdl-badge-new">Новый</span><?php endif; ?></div><?php endif; ?>
             <?php if ($summary !== '') : ?><p class="wpdl-single-document-summary"><?php echo esc_html($summary); ?></p><?php endif; ?>
             <?php if (! empty($file_info_rows)) : ?>
