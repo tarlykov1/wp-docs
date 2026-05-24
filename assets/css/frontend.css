@@ -55,6 +55,8 @@
 .wpdl-single-document-thumbnail img{width:100%;height:auto;display:block}
 .wpdl-single-document-content{min-width:0}
 .wpdl-single-document-title{margin:0 0 8px}
+.wdl-document-content{margin-top:12px;margin-bottom:16px;font-size:16px;line-height:1.6;color:#334155}
+.wdl-document-content p{margin-bottom:.75rem}
 .wpdl-single-document-summary{margin:0 0 14px;color:#667085;font-size:15px}
 .wpdl-single-document-description{margin-bottom:14px}
 .wpdl-single-document-fields,.wpdl-single-document-file-info{margin-bottom:12px}
