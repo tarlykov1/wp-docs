@@ -6,7 +6,6 @@
                 <th>Документ</th>
                 <th class="wdl-col-type">Тип</th>
                 <th class="wdl-col-size">Размер</th>
-                <th class="wdl-col-actions">Действие</th>
             </tr>
         </thead>
         <tbody>
@@ -18,7 +17,6 @@
             $ext = strtoupper($data['helpers']->get_file_ext($u));
             $file_id = absint(get_post_meta(get_the_ID(), '_wdl_file_id', true));
             $size_label = '';
-            $show_download_catalog = (bool) WDL_Settings::get_option('show_download_in_catalog', 0);
             if ($file_id) {
                 $file_path = get_attached_file($file_id);
                 if ($file_path && file_exists($file_path)) {
@@ -38,15 +36,9 @@
                 </td>
                 <td data-label="Тип"><?php echo esc_html($ext ?: '—'); ?></td>
                 <td data-label="Размер"><?php echo esc_html($size_label ?: '—'); ?></td>
-                <td data-label="Действие">
-                    <a class="wdl-button wdl-button-small" href="<?php echo esc_url(get_permalink()); ?>">Открыть</a>
-                    <?php if ($show_download_catalog && $u) : ?>
-                        <a class="wdl-button wdl-button-download wdl-button-small" href="<?php echo esc_url($u); ?>" target="_blank" rel="noopener">Скачать</a>
-                    <?php endif; ?>
-                </td>
             </tr>
         <?php endwhile; else : ?>
-            <tr><td colspan="5">Документы не найдены</td></tr>
+            <tr><td colspan="4">Документы не найдены</td></tr>
         <?php endif; ?>
         </tbody>
     </table>

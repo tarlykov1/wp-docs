@@ -16,7 +16,7 @@
 </select>
 <?php else : ?>
     <span>Категории документов пока не созданы.</span>
-    <a href="<?php echo esc_url(admin_url('edit-tags.php?taxonomy=wdl_document_category&post_type=wdl_document')); ?>">Создать категорию</a>
+    <a href="<?php echo esc_url(admin_url('edit-tags.php?taxonomy=' . $document_category_taxonomy . '&post_type=wdl_document')); ?>">Создать категорию</a>
 <?php endif; ?>
 </p>
 <p><label><input type="checkbox" name="wdl_pdf_viewer" <?php checked($pdf_viewer,1);?>> Показывать PDF через просмотровщик</label></p>
