@@ -20,7 +20,7 @@ $important = $helpers->is_truthy(get_post_meta($post_id, '_wdl_important', true)
 $is_new = $helpers->is_truthy(get_post_meta($post_id, '_wdl_new', true));
 $show_pdf = $helpers->is_truthy(get_post_meta($post_id, '_wdl_pdf_viewer', true));
 $content_raw = (string) get_post_field('post_content', $post_id);
-$document_content = apply_filters('the_content', $content_raw);
+$document_content = wpautop(do_shortcode($content_raw));
 $has_document_content = ! empty(trim(wp_strip_all_tags($document_content)));
 
 $library_page_id = absint(WDL_Settings::get_option('wdl_library_page_id', 0));
