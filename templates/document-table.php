@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th class="wdl-col-thumb">Превью</th>
-                <th>Документ</th>
+                <th class="wdl-col-document">Документ</th>
                 <th class="wdl-col-type">Тип</th>
                 <th class="wdl-col-size">Размер</th>
             </tr>
@@ -29,7 +29,7 @@
             ?>
             <tr class="wdl-item wdl-document-item" data-doc-id="<?php echo esc_attr(get_the_ID()); ?>" data-search="<?php echo esc_attr(strtolower(trim(get_the_title() . ' ' . $description . ' ' . $ext . ' ' . $size_label))); ?>" data-wdl-item data-title="<?php echo esc_attr(get_the_title()); ?>" data-summary="<?php echo esc_attr($description); ?>" data-date="<?php echo esc_attr(get_the_date('Y-m-d')); ?>" data-order="<?php echo esc_attr($manual_order); ?>" data-file-size="<?php echo esc_attr($file_size); ?>" data-file-type="<?php echo esc_attr(strtolower($ext)); ?>">
                 <td class="wdl-doc-thumb" data-label="Превью"><a class="wdl-doc-thumb-link" href="<?php echo esc_url(get_permalink()); ?>"><?php echo $data['helpers']->get_thumb_or_icon(get_the_ID(), $u, 'thumbnail'); ?></a></td>
-                <td data-label="Документ">
+                <td class="wdl-col-document" data-label="Документ">
                     <h3 class="wdl-doc-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php the_title(); ?></a></h3>
                     <p class="wdl-doc-description"><?php echo esc_html($description); ?></p>
                     <?php if ($important || $is_new) : ?><div class="wdl-badges"><?php if ($important) : ?><span class="wdl-badge wdl-badge-important">Важный</span><?php endif; ?><?php if ($is_new) : ?><span class="wdl-badge wdl-badge-new">Новый</span><?php endif; ?></div><?php endif; ?>
