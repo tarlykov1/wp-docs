@@ -11,7 +11,7 @@
 <select class="widefat" name="wdl_document_category" id="wdl_document_category">
     <option value="0">Без категории</option>
     <?php foreach ($document_categories as $document_category) : ?>
-        <option value="<?php echo esc_attr($document_category->term_id); ?>" <?php selected(in_array((int) $document_category->term_id, (array) $selected_categories, true)); ?>><?php echo esc_html($document_category->name); ?></option>
+        <option value="<?php echo esc_attr($document_category->term_id); ?>" <?php selected((int) $selected_category_id, (int) $document_category->term_id); ?>><?php echo esc_html($document_category->name); ?></option>
     <?php endforeach; ?>
 </select>
 <?php else : ?>

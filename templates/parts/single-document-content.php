@@ -60,14 +60,13 @@ $helpers->render_breadcrumbs($breadcrumbs);
                 </section>
             <?php endif; ?>
             <?php $show_download = $helpers->is_truthy(get_post_meta($post_id, '_wdl_show_download', true)); ?>
-            <?php if ($file_url !== '') : ?><div class="wpdl-document-actions wpdl-single-document-actions"><?php if ($show_download) : ?><a href="<?php echo esc_url($file_url); ?>" download class="wdl-btn wdl-btn-primary">Скачать</a><?php endif; ?><a href="<?php echo esc_url($file_url); ?>" target="_blank" rel="noopener noreferrer" class="wdl-btn wdl-btn-outline-primary">Открыть</a></div><?php endif; ?>
+            <?php if ($file_url !== '') : ?><div class="wpdl-document-actions wpdl-single-document-actions"><?php if ($show_download) : ?><a href="<?php echo esc_url($file_url); ?>" download class="wdl-btn wdl-btn-primary">Скачать PDF</a><?php endif; ?><a href="<?php echo esc_url($file_url); ?>" target="_blank" rel="noopener noreferrer" class="wdl-btn wdl-btn-outline-primary">Открыть PDF</a></div><?php endif; ?>
         </div>
     </div>
 </article>
 
 <?php if ($show_pdf && $file_url !== '' && $helpers->is_pdf($file_url)) : ?>
 <section class="wdl-document-viewer-section">
-    <div class="wdl-document-viewer-header"><button type="button" class="wdl-btn wdl-btn-secondary wdl-viewer-toggle" aria-expanded="false" data-text-open="Посмотреть документ" data-text-close="Скрыть документ">Посмотреть документ</button></div>
-    <div class="wdl-document-viewer-wrap" hidden><iframe src="<?php echo esc_url($file_url); ?>" class="wdl-pdf-viewer" loading="lazy"></iframe></div>
+    <iframe src="<?php echo esc_url($file_url); ?>" class="wdl-pdf-viewer" loading="lazy"></iframe>
 </section>
 <?php endif; ?>
