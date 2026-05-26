@@ -5,7 +5,7 @@ class WDL_Meta_Boxes {
     public function __construct(){ add_action('add_meta_boxes',array($this,'add')); add_action('save_post_wdl_document',array($this,'save')); add_action('admin_enqueue_scripts',array($this,'assets')); }
     public function add(){ add_meta_box('wdl_document_meta','Параметры документа',array($this,'render'),'wdl_document','normal','default'); }
     public function assets($hook){ if ('post.php'!==$hook && 'post-new.php'!==$hook) return; wp_enqueue_media(); wp_enqueue_script('wdl-admin',WDL_PLUGIN_URL.'assets/js/admin.js',array('jquery'),WDL_PLUGIN_VERSION,true); }
-    public function render($post){ wp_nonce_field('wdl_save_meta','wdl_meta_nonce'); $fields=['file_id','file_url','version','updated_date','owner','doc_number','expiry_date','card_description','pdf_viewer','show_download','important','new','manual_order']; foreach($fields as $f){ $$f=get_post_meta($post->ID,'_wdl_'.$f,true);} $document_category_taxonomy = self::DOCUMENT_CATEGORY_TAXONOMY; $document_categories=get_terms(array('taxonomy'=>$document_category_taxonomy,'hide_empty'=>false)); $current_terms = wp_get_object_terms($post->ID, $document_category_taxonomy, array('fields' => 'ids'));
+    public function render($post){ wp_nonce_field('wdl_save_meta','wdl_meta_nonce'); $fields=['file_id','file_url','version','updated_date','owner','doc_number','expiry_date','card_description','pdf_viewer','show_download','important','new','manual_order']; foreach($fields as $f){ $$f=get_post_meta($post->ID,'_wdl_'.$f,true);} $document_category_taxonomy = self::DOCUMENT_CATEGORY_TAXONOMY; $document_categories = get_terms(array('taxonomy' => $document_category_taxonomy, 'hide_empty' => false)); $current_terms = wp_get_object_terms($post->ID, $document_category_taxonomy, array('fields' => 'ids'));
         $selected_category_id = ! empty($current_terms) ? absint(reset($current_terms)) : 0;
         include WDL_PLUGIN_DIR.'templates/admin-metabox.php'; }
     public function save($post_id){
@@ -17,15 +17,13 @@ class WDL_Meta_Boxes {
         if(isset($_POST['wdl_file_url'])) update_post_meta($post_id,'_wdl_file_url',esc_url_raw(wp_unslash($_POST['wdl_file_url'])));
         update_post_meta($post_id,'_wdl_manual_order',isset($_POST['wdl_manual_order'])?absint($_POST['wdl_manual_order']):0);
         foreach(['pdf_viewer','show_download','important','new'] as $c){ update_post_meta($post_id,'_wdl_'.$c,isset($_POST['wdl_'.$c])?1:0); }
-        if (isset($_POST['wdl_document_category'])) {
-            $term_id = absint($_POST['wdl_document_category']);
-            $term_exists = $term_id > 0 ? term_exists($term_id, self::DOCUMENT_CATEGORY_TAXONOMY) : 0;
+                $term_id = isset($_POST['wdl_document_category']) ? absint($_POST['wdl_document_category']) : 0;
+        $term_exists = $term_id > 0 ? term_exists($term_id, self::DOCUMENT_CATEGORY_TAXONOMY) : 0;
 
-            if ($term_id > 0 && $term_exists) {
-                wp_set_object_terms($post_id, array($term_id), self::DOCUMENT_CATEGORY_TAXONOMY, false);
-            } else {
-                wp_set_object_terms($post_id, array(), self::DOCUMENT_CATEGORY_TAXONOMY, false);
-            }
+        if ($term_id > 0 && $term_exists) {
+            wp_set_object_terms($post_id, array($term_id), self::DOCUMENT_CATEGORY_TAXONOMY, false);
+        } else {
+            wp_set_object_terms($post_id, array(), self::DOCUMENT_CATEGORY_TAXONOMY, false);
         }
     }
 }
