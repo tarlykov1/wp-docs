@@ -6,7 +6,8 @@ class WDL_Post_Types {
         register_post_type('wdl_document', array(
             'labels'=>array('name'=>'Документы','singular_name'=>'Документ','add_new_item'=>'Добавить документ','edit_item'=>'Редактировать документ','menu_name'=>'Библиотека документов'),
             'public'=>true,'has_archive'=>true,'rewrite'=>array('slug'=>WDL_Settings::get_option('archive_slug','documents')),
-            'supports'=>array('title','editor','thumbnail','excerpt','page-attributes'),'show_in_rest'=>true,'menu_icon'=>'dashicons-media-document'
+            'supports'=>array('title','editor','thumbnail','excerpt','page-attributes'),'show_in_rest'=>true,'menu_icon'=>'dashicons-media-document',
+            'taxonomies' => array('wdl_document_category'),
         ));
     }
 }
